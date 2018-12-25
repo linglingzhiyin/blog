@@ -1,0 +1,25 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: production-system
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/20181?useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: mzj123
+      initial-size: 1
+      max-active: 20
+      min-idle: 1
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 30000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+mybatis:
+  type-aliases-package: com.domain
