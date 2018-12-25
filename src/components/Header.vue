@@ -7,7 +7,7 @@
           <router-link class="nav-link" to="/">主页</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="#">心得笔记</router-link>
+          <router-link class="nav-link" to="/note">心得笔记</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">陌上花开</router-link>
