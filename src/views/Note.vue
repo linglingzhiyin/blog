@@ -1,5 +1,6 @@
 <template>
   <div class="note">
+    <app-header></app-header>
     <h1>心得笔记</h1>
     <div class="row">
       <div class="col-lg-2 col-sm-3">
@@ -35,8 +36,14 @@
 </template>
 
 <script>
+
+import Header from '@/components/Header.vue'
+
 export default {
   name: "Note",
+   components: {
+     appHeader: Header
+  },
   data: function() {
     return {
       articleList: [],

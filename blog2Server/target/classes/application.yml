@@ -2,11 +2,11 @@ server:
   port: 9001
 spring:
   application:
-    name: production-system
+    name: blog
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://127.0.0.1:3306/20181?useSSL=false
+      url: jdbc:mysql://127.0.0.1:3306/20181?useUnicode=true&amp;characterEncoding=UTF-8
       driver-class-name: com.mysql.jdbc.Driver
       username: root
       password: mzj123

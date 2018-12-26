@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Note from './views/Note.vue'
+import BlogMain from './views/admin/BlogMain.vue'
+import ArticleAdd from './views/admin/ArticleAdd.vue'
 
 Vue.use(Router)
 
@@ -10,6 +12,16 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+    path: '/articleAdd',
+    name: 'articleAdd',
+    component: ArticleAdd
+    },
+    {
+      path: '/blogMain',
+      name: 'blogMain',
+      component: BlogMain
+    }, 
+    {
       path: '/note',
       name: 'note',
       component: Note
@@ -17,7 +29,10 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      components:{
+        default:Home,
+        'note':Note
+      }
     },
     {
       path: '/about',

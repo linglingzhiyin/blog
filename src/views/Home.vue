@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <h1>哈哈哈哈</h1>
+    <app-header></app-header>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import Header from '@/components/Header.vue'
+import Header from '@/components/Header.vue'
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    // appHeader:Header
+     appHeader: Header
   }
-}
+};
 </script>

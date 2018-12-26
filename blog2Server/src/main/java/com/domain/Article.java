@@ -1,11 +1,14 @@
 package com.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 @Data
 public class Article {
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     private String title;

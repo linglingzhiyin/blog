@@ -1,9 +1,13 @@
 <template>
   <!-- <link rel="stylesheet" href="../assets/css/bootstrap4.0.min.css" > -->
   <div id="app">
-    <app-header></app-header>
+    <router-view/>
     <div class="container">
-      <router-view/>
+      <div class="row">
+        <div class="col-md-3">
+          <router-view name="note"></router-view>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -11,12 +15,9 @@
 
 <script>
 // @ is an alias to /src
-import Header from "@/components/Header.vue";
 
 export default {
-  components: {
-    appHeader: Header
-  }
+  components: {}
 };
 </script>
 
