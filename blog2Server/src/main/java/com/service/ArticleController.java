@@ -2,6 +2,8 @@ package com.service;
 
 import com.domain.Article;
 import com.mapper.ArticleMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,15 +18,8 @@ public class ArticleController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
-        Article article = new Article();
-        article.setContent("adasdasdasd");
-        article.setClick(1);
-        article.setTime(new Date());
-        article.setCatalogId(1);
-        article.setKeywords("asdasdasd");
-        article.setTitle("哈哈哈哈哈");
-        article.setDesci("哈哈哈哈哈");
-        articleMapper.insert(article);
+        Logger log = LoggerFactory.getLogger("abc");
+        log.error("getExceptionLogger===日志测试");
         return "test";
     }
 }

@@ -1,36 +1,24 @@
 <template>
-  <div class="articleDetail">
+  <div id="articleDetail">
     <app-header></app-header>
-    <table class="table table-striped table-sm">
-      <tr class="table-active">
-        <th width="15%">ID</th>
-        <td>${article.id}</td>
-      </tr>
-      <tr class="table-secondary">
-        <th>标题</th>
-        <td>${article.title}</td>
-      </tr>
-      <tr class="table-success">
-        <th>关键字</th>
-        <td>${article.keywords}</td>
-      </tr>
-      <tr class="table-danger">
-        <th>简介</th>
-        <td>${article.desci}</td>
-      </tr>
-      <tr class="table-warning">
-        <th>发表时间</th>
-        <td>${article.localTime}</td>
-      </tr>
-      <tr class="table-info">
-        <th>点击量</th>
-        <td>${article.click}</td>
-      </tr>
-      <tr class="table-light">
-        <th>内容</th>
-        <td>${article.content}</td>
-      </tr>
-    </table>
+    <div class="container">
+      <label for="title">文章标题</label>
+      <label class="form-control">{{article.title}}</label>
+      <label for="title">文章标题</label>
+      <label class="form-control">{{article.title}}</label>
+      <div v-if="article.keywords.length>0">
+        <label for="title">关键字</label>
+        <label class="form-control">{{article.keywords}}</label>
+      </div>
+      <label for="title">简介</label>
+      <label class="form-control">{{article.desci}}</label>
+      <label for="title">发表时间</label>
+      <label class="form-control">{{article.time}}</label>
+      <label for="title">点击量</label>
+      <label class="form-control">{{article.click}}</label>
+      <label for="title">内容</label>
+      <div id="vhtml" v-html="article.content"></div>
+    </div>
   </div>
 </template>
 
@@ -42,13 +30,20 @@ export default {
   name: "articleDetail",
   data: function() {
     return {
-      res: this.$axios.get("/api/main").then(result => {
-        this.res = result.data;
-      })
+      article: this.$axios
+        .get(
+          "/api/admin/article/detail?" +
+            "articleId=" +
+            this.$route.params.articleId
+        )
+        .then(result => {
+          this.article = result.data.article;
+        })
     };
   },
   components: {
     appHeader: Header
-  }
+  },
+  methods: {}
 };
 </script>

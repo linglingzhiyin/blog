@@ -1,15 +1,18 @@
 package com;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@MapperScan("com.mapper")
+
 @SpringBootApplication
 public class AppMain {
-
+    private static final Logger logger = LoggerFactory.getLogger(AppMain.class);
     public static void main(String[] agrs){
         SpringApplication.run(AppMain.class);
+        logger.info("========================启动完毕========================");
     }
 
 }

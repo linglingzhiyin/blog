@@ -4,12 +4,12 @@
     <div class="container">
       <div class="form-group">
         <label for="title">文章标题</label>
-        <input v-model="article.title" placeholder="标题">
+        <input class="form-control" v-model="article.title" placeholder="标题">
       </div>
       <div class="form-group">
         <label for="catalogId">栏目</label>
-        <select v-model="article.catalogId">
-          <option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
+        <select class="form-control" v-model="article.catalogId">
+          <option class="form-control" v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
         </select>
       </div>
       <div class="form-group">
@@ -24,9 +24,10 @@
 
       <div class="form-group">
         <label for="div1">内容</label>
-        <textarea class="form-control" rows="3" v-model="article.content" placeholder="内容"></textarea>
+        <markdown-blog v-model="article.content"></markdown-blog>
+        <!-- <textarea class="form-control" rows="3" v-model="article.content" placeholder="内容"></textarea> -->
       </div>
-      <button id="fabiao" @click="onClick">发表</button>
+      <button class="btn btn-success" id="fabiao" @click="onClick">发表</button>
     </div>
   </div>
 </template>
@@ -34,17 +35,17 @@
 <script>
 // @ is an alias to /src
 import Header from "@/components/admin/Header.vue";
-
+import MarkdownBlog from '@/components/MarkdownBlog.vue'
 export default {
   name: "articleAdd",
   data() {
     return {
       article: {
-        title: "1",
-        content: "2",
+        title: "",
+        content: "",
         catalogId: 0,
-        keywords: "3",
-        desci: "4"
+        keywords: "",
+        desci: ""
       },
       options: [{ text: "学习", value: 0 }, { text: "生活", value: 1 }]
     };
@@ -58,7 +59,8 @@ export default {
     }
   },
   components: {
-    appHeader: Header
+    appHeader: Header,
+    MarkdownBlog
   }
 };
 </script>

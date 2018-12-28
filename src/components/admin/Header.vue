@@ -12,18 +12,18 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand text-success" href="/admin/main">博客管理</a>
+      <router-link class="navbar-brand text-success" to="/blogMain">博客管理</router-link>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" to="/note">添加文章</router-link>
+            <router-link class="nav-link" to="/articleAdd">添加文章</router-link>
           </li>
-          <li class="nav-item active">
+          <!-- <li class="nav-item active">
             <a class="nav-link" href="/blogMain">主页</a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="/admin/article/list">文章管理</a>
+              <router-link class="nav-link" to="/articleList">文章管理</router-link>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/admin/article/search" method="GET">

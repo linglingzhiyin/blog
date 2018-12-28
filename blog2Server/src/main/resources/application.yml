@@ -1,5 +1,19 @@
 server:
   port: 9001
+  tomcat:
+    accesslog:
+      buffered: true
+      directory: E:/2018/logs
+      enabled: true
+      file-date-format: _yyyy-MM-dd
+      pattern: common
+      prefix: access_log
+      rename-on-rotate: false
+      request-attributes-enabled: false
+      rotate: true
+      suffix: .log
+logging:
+  config: classpath:log4j2.yml
 spring:
   application:
     name: blog
