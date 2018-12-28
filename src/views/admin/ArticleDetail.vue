@@ -32,7 +32,7 @@ export default {
     return {
       article: this.$axios
         .get(
-          "/api/admin/article/detail?" +
+          "/api/admin/article?" +
             "articleId=" +
             this.$route.params.articleId
         )

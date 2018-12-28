@@ -19,34 +19,34 @@
           <tr v-for="article in articles">
             <th scope="row">{{article.id}}</th>
             <td>{{article.title}}</td>
-            <td>{{article.localTime}}</td>
+            <td>{{article.time}}</td>
             <td>{{article.click}}</td>
             <td>
               <button
                 type="button"
                 class="btn btn-outline-info btn-sm"
-                @click="fullScreen(article.id)"
+                @click="fullScreen('articleDetail',article.id)"
               >详情</button>
             </td>
             <td>
               <button
                 type="button"
                 class="btn btn-outline-success btn-sm"
-                onclick="fullScreen('《${article.title}》|评论管理','/admin/article/comment?id=${article.id}')"
+                @click="fullScreen('commentList',article.id)"
               >评论</button>
             </td>
             <td>
               <button
                 type="button"
                 class="btn btn-outline-primary btn-sm"
-                onclick="fullScreen('《${article.title}》|编辑','/admin/article/edit?id=${article.id}')"
+                @click="fullScreen('articleEdit',article.id)"
               >编辑</button>&nbsp;&nbsp;
             </td>
             <td>
               <button
                 type="button"
                 class="btn btn-outline-danger btn-sm"
-                onclick="ifdelete('${article.id}','${article.title}') "
+                @click="ifdelete(article.id)"
               >删除</button>
             </td>
           </tr>
@@ -77,7 +77,6 @@ export default {
   name: "articleList",
   data: function() {
     return {
-      pageIndex: 1,
       articles: [],
       current: 1,
       pages: 1,
@@ -105,14 +104,20 @@ export default {
           this.articles = result.data.result.records;
         });
     },
-    fullScreen: function(articleId) {
-       this.$router.push({
-          name: 'articleDetail',
-          params: {
-            articleId: articleId
-          }
-        })
-
+    fullScreen: function(url, articleId) {
+      this.$router.push({
+        name: url,
+        params: {
+          articleId: articleId
+        }
+      });
+    },
+    ifdelete: function(articleId) {
+      this.$axios
+        .delete("/api/admin/article?" + "articleId=" + articleId)
+        .then(result => {
+          alert(result.data.result);
+        });
     }
   },
   components: {

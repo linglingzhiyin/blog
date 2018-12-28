@@ -13,7 +13,7 @@ server:
       rotate: true
       suffix: .log
 logging:
-  config: classpath:log4j2.yml
+  config: classpath:log4j2.xml
 spring:
   application:
     name: blog

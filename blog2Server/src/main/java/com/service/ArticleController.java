@@ -18,8 +18,7 @@ public class ArticleController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
-        Logger log = LoggerFactory.getLogger("abc");
-        log.error("getExceptionLogger===日志测试");
+        int i=5/0;
         return "test";
     }
 }

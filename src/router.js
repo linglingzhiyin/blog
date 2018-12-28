@@ -6,6 +6,8 @@ import BlogMain from './views/admin/BlogMain.vue'
 import ArticleAdd from './views/admin/ArticleAdd.vue'
 import ArticleList from './views/admin/ArticleList.vue'
 import ArticleDetail from './views/admin/ArticleDetail.vue'
+import CommentList from './views/admin/CommentList.vue'
+import ArticleEdit from './views/admin/ArticleEdit.vue'
 
 import NoteCom from "@/components/NoteCom.vue";
 import AboutCom from "@/components/AboutCom.vue";
@@ -17,34 +19,50 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/articleEdit',
+      name: 'articleEdit',
+      components:
+      {
+        'admin': ArticleEdit
+      }
+    },
+    {
+      path: '/commentList',
+      name: 'commentList',
+      components:
+      {
+        'admin': CommentList
+      }
+    },
+    {
       path: '/articleDetail',
       name: 'articleDetail',
-      components: 
+      components:
       {
-        'admin':ArticleDetail
+        'admin': ArticleDetail
       }
     },
     {
       path: '/articleList',
       name: 'articleList',
-      components: 
+      components:
       {
         'admin': ArticleList
       }
-      
+
     },
     {
       path: '/articleAdd',
       name: 'articleAdd',
       components: {
-        'admin':ArticleAdd
+        'admin': ArticleAdd
       }
     },
     {
       path: '/blogMain',
       name: 'blogMain',
       components: {
-        'admin':BlogMain
+        'admin': BlogMain
       }
     },
     {
