@@ -8,6 +8,8 @@ import ArticleList from './views/admin/ArticleList.vue'
 import ArticleDetail from './views/admin/ArticleDetail.vue'
 import CommentList from './views/admin/CommentList.vue'
 import ArticleEdit from './views/admin/ArticleEdit.vue'
+import Detail from './views/Detail.vue'
+import Login from './views/Login.vue'
 
 import NoteCom from "@/components/NoteCom.vue";
 import AboutCom from "@/components/AboutCom.vue";
@@ -17,7 +19,23 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
+  routes: [   
+    {
+    path: '/login',
+    name: 'login',
+    components:
+    {
+      'admin': Login
+    }
+  },
+    {
+    path: '/detail',
+    name: 'detail',
+    components:
+    {
+      'admin': Detail
+    }
+  },
     {
       path: '/articleEdit',
       name: 'articleEdit',

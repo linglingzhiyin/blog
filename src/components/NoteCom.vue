@@ -1,5 +1,6 @@
 <template>
   <div id="NoteCom">
+ 
     <ul id="notexin">
       <li v-for="article in articleList">
         <!-- <time>{{article.localTime}}</time> -->
@@ -28,8 +29,9 @@ export default {
   components: {},
   data: function() {
     return {
+  
       articleList: [],
-      keywords: ["java", "spring", "springboot"]
+      keywords: []
     };
   },
   props: {},

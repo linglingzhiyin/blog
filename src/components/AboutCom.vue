@@ -1,19 +1,11 @@
 <template>
   <div id="aboutCom">
-    <div>
+    <div class="container">
       <div id="bg">
-        <p>和所有以梦为马的诗人一样
-          <br>
-          <i>岁月易逝 一滴不剩</i>
+        <p class="text-center">岁月老去，陌上伊人，犹如嫩黄的小草</p>
+        <p class="text-center">一趟与江水的竞技，你在岸边垂钓，你沉睡深渊，你苦苦挣扎，却只能看见一丝丝曙光……
+          <a href="/">主页</a>
         </p>
-      </div>
-      <div id="container">
-        <article class="article">
-          <h3>你来人间一趟，你要看看太阳</h3>
-          <h3>邮箱:
-            <a href="mzj2610@163.com">mzj2610@163.com</a>
-          </h3>
-        </article>
       </div>
     </div>
   </div>
@@ -24,9 +16,9 @@
 // import Header from '@/components/Header.vue'
 
 export default {
-  name: 'aboutCom',
+  name: "aboutCom",
   components: {
     // appHeader:Header
   }
-}
+};
 </script>

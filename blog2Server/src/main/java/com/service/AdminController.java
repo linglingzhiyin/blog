@@ -3,6 +3,7 @@ package com.service;
 import com.domain.Admin;
 import com.domain.AdminLoginLog;
 import com.mapper.ArticleMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Slf4j
 public class AdminController {
 
     @Autowired
     private ArticleMapper articleMapper;
+
+
+    //    @PostMapping("/loginSucc")
+//    @ResponseBody
+//    @CrossOrigin(origins ="http://127.0.0.1:8080", maxAge = 3600)
+//    public void toView() {
+//        log.info("哈哈哈");
+//    }
+
+    @PostMapping("/api/loginSucc")
+    public void toView(HttpServletRequest request) {
+        //request.login();
+        log.info("哈哈哈");
+    }
 
     @GetMapping("/api/main")
     @ResponseBody

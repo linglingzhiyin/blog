@@ -1,7 +1,7 @@
 <template>
   <Header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-     <h1>朾的个人博客</h1>
+      <h1>朾的个人博客</h1>
       <ul class="navbar-nav">
         <li class="nav-item">
           <router-link class="nav-link" to="/">主页</router-link>
@@ -9,23 +9,23 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/note">心得笔记</router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link class="nav-link" to="#">陌上花开</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="#">下载</router-link>
-        </li>
+        </li>-->
         <li class="nav-item">
           <router-link class="nav-link" to="/about">关于</router-link>
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto" >
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link class="nav-link" to="#">登陆</router-link>
+            <router-link class="nav-link" to="/login">登录</router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link class="nav-link" to="#">注册</router-link>
-        </li>
+        </li>-->
       </ul>
     </nav>
   </Header>

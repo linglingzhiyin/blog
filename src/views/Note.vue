@@ -2,20 +2,56 @@
   <div id="note">
     <app-header/>
     <div class="container">
-      <h1>心得笔记</h1>
       <div class="row">
         <div class="col-lg-2 col-sm-3">
+          <div class="span3 bs-docs-sidebar">
+            <ul id="notexin" class="nav-list">
+              <li v-for="(value, key) in keywords">
+                <label @click="onClick1(key)">{{key}}({{value}})</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-10 col-sm-9">
           <ul id="notexin">
-            <li v-for="keyword in keywords">
-              <a href="#">{{ keyword }}</a>
+            <li v-for="article in articleList">
+              <!-- <time>{{article.localTime}}</time> -->
+              <h2 class="title">
+                <a href="#">{{article.title}}</a>
+              </h2>
+              <span>
+                <i>{{article.keywords}}</i>
+              </span>
+              <section class="article-content markdown-body">
+                <blockquote>
+                  <p>{{article.desci}}</p>
+                </blockquote>......
+              </section>
+              <footer>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  @click="fullScreen('detail',article.id)"
+                >阅读全文</button>
+              </footer>
             </li>
           </ul>
         </div>
-        <div class="col-lg-10 col-sm-9">
-          <note-com/>
-        </div>
       </div>
     </div>
+    <nav aria-label="Page navigation example" style="position: absolute;bottom: 10px;left: 42%">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" @click="onClick(staticKey,1)">&laquo;</a>
+        </li>
+        <li class="page-item" v-for="pageIndex in pages">
+          <a class="page-link" @click="onClick(staticKey,pageIndex)">{{pageIndex}}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" @click="onClick(staticKey,pages)">&raquo;</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -32,16 +68,75 @@ export default {
   },
   data: function() {
     return {
-      articleList: [],
-      keywords: ["java", "spring", "springboot"]
+      current: 1,
+      pages: 1,
+      pagesArr: [],
+      size: 3,
+      total: 0,
+      staticKey: "",
+      articleList: this.$axios.get("/api/articleList").then(result => {
+        this.articleList = result.data.result.records;
+        this.current = result.data.result.current;
+        var i = 1;
+        for (; i <= result.data.result.pages; i++) {
+          this.pagesArr[i - 1] = i;
+        }
+        this.pages = result.data.result.pages;
+        this.size = result.data.result.size;
+      }),
+      keywords: this.$axios.get("/api/keywordList").then(result => {
+        this.keywords = result.data;
+      })
     };
   },
   props: {},
-  created() {
-    //fetch
-    this.$axios.get("/api/articleList").then(result => {
-      this.articleList = result.data.result.records;
-    });
+  methods: {
+    onClick1: function(keyword) {
+      if (keyword == "Count") {
+        this.$axios.get("/api/articleList").then(result => {
+          this.articleList = result.data.result.records;
+          this.current = result.data.result.current;
+          var i = 1;
+          for (; i <= result.data.result.pages; i++) {
+            this.pagesArr[i - 1] = i;
+          }
+          this.pages = result.data.result.pages;
+          this.size = result.data.result.size;
+        });
+      } else {
+        this.staticKey = keyword;
+        this.$axios.get("/api/articleList/" + keyword).then(result => {
+          this.articleList = result.data.result.records;
+          var i = 1;
+          for (; i <= result.data.result.pages; i++) {
+            this.pagesArr[i - 1] = i;
+          }
+          this.pages = result.data.result.pages;
+        });
+      }
+    },
+    fullScreen: function(url, articleId) {
+      this.$router.push({
+        name: url,
+        params: {
+          articleId: articleId
+        }
+      });
+    },
+    onClick: function(keyword, pageIndex) {
+      if (keyword != "")
+        this.$axios
+          .get("/api/articleList/" + keyword + "?page=" + pageIndex)
+          .then(result => {
+            this.articleList = result.data.result.records;
+          });
+      else
+        this.$axios
+          .get("/api/articleList?" + "page=" + pageIndex)
+          .then(result => {
+            this.articleList = result.data.result.records;
+          });
+    }
   }
 };
 </script>
