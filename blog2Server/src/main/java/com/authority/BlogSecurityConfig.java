@@ -64,7 +64,7 @@ public class BlogSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/api/loginSucc")
                 //.loginProcessingUrl("/")
-             //   .successForwardUrl("/api/loginSucc")
+                //   .successForwardUrl("/api/loginSucc")
                 .successHandler(new JsonAuthenticationSuccessHandler())
                 .failureHandler(new JsonAuthenticationFailureHandler())
                 .and()
