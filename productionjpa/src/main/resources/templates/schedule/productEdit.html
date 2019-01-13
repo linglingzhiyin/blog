@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"
+            src="/js/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery.easyui.min.js}"
+            src="/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/common.js}"
+            src="/js/common.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/datagrid-filter.js}"
+            src="/js/datagrid-filter.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js}"
+            src="/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/easyui.css}"
+          href="../../static/css/easyui.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/icon.css}"
+          href="../../static/css/icon.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/taotao.css}"
+          href="/css/taotao.css"/>
+
+    <link href="/js/kindeditor-4.1.10/themes/default/default.css"
+          th:href="@{/js/kindeditor-4.1.10/themes/default/default.css}"
+          type="text/css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/kindeditor-all-min.js}"
+            src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/lang/zh_CN.js}"
+            src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+
+    <link href="/css/uploadfile.css"
+          th:href="@{/css/uploadfile.css}"
+          rel="stylesheet">
+    <script src="/js/jquery.uploadfile.js"
+            th:src="@{/js/jquery.uploadfile.js}"></script>
+</head>
+<body>
+
+<div style="padding:10px 10px 10px 10px">
+    <form id="productEditForm" class="productForm" method="post">
+        <input type="hidden" name="productId"/>
+        <table cellpadding="5">
+            <tr>
+                <td>产品名称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="productName" data-options="required:true"></input>
+                </td>
+            </tr>
+            <tr>
+                <td>产品种类:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="productType" data-options="required:true"></input>
+                </td>
+            </tr>
+            <tr>
+                <td>产品状态:</td>
+                <td>
+                    <select id="cc" class="easyui-combobox" name="status" panelHeight="auto"
+                            data-options="required:true,width:150, editable:false">
+                        <option value="1">有效产品</option>
+                        <option value="2">停产</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>相关图片:</td>
+                <td>
+                    <a href="javascript:void(0)" class="easyui-linkbutton productPicFileUpload">上传图片</a>
+                    <input type="hidden" id="productImage" name="image"/>
+                </td>
+            </tr>
+            <tr>
+                <td>产品介绍:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitProductEditForm()">提交</a>
+    </div>
+</div>
+<script type="text/javascript">
+    var productEditEditor;
+
+    $(function () {
+        //实例化富文本编辑器
+        productEditEditor = TAOTAO.createEditor("#productEditForm [name=note]");
+    });
+    //同步kindeditor中的内容
+    productEditEditor.sync();
+
+    function submitProductEditForm() {
+        if (!$('#productEditForm').form('validate')) {
+            $.messager.alert('提示', '表单还未填写完成!');
+            return;
+        }
+        productEditEditor.sync();
+
+        $.post("/product/update_all", $("#productEditForm").serialize(), function (data) {
+            if (data.status == 200) {
+                $.messager.alert('提示', '修改产品成功!', 'info', function () {
+                    $("#productEditWindow").window('close');
+                    $("#productList").datagrid("reload");
+                });
+            } else {
+                $.messager.alert('提示', data.msg);
+            }
+        });
+    }
+</script>
+</body>
+</html>

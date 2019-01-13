@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"
+            src="/js/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery.easyui.min.js}"
+            src="/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/common.js}"
+            src="/js/common.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/datagrid-filter.js}"
+            src="/js/datagrid-filter.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js}"
+            src="/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/easyui.css}"
+          href="../../static/css/easyui.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/icon.css}"
+          href="../../static/css/icon.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/taotao.css}"
+          href="/css/taotao.css"/>
+
+    <link href="/css/default.css" th:href="@{/css/default.css}"
+          type="text/css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/kindeditor-all-min.js}"
+            src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/zh_CN.js}"
+            src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+</head>
+<body>
+
+<div style="padding:10px 10px 10px 10px">
+    <form id="deviceTypeEditForm" class="deviceTypeForm" method="post">
+        <input type="hidden" name="deviceTypeId"/>
+        <table cellpadding="5">
+            <tr>
+                <td>设备种类名称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="deviceTypeName"/>
+                </td>
+            </tr>
+            <tr>
+                <td>型号:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="deviceTypeModel"/>
+                </td>
+            </tr>
+            <tr>
+                <td>规格:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="deviceTypeSpec"/>
+                </td>
+            </tr>
+            <tr>
+                <td>供应商:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="deviceTypeSupplier"/>
+                </td>
+            </tr>
+            <tr>
+                <td>生产商:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="deviceTypeProducer"/>
+                </td>
+            </tr>
+            <tr>
+                <td>台数:</td>
+                <td>
+                    <input class="easyui-numberbox" name="deviceTypeQuantity"/>
+                </td>
+            </tr>
+            <tr>
+                <td>保修期:</td>
+                <td>
+                    <input class="easyui-datebox" name="deviceTypeWarranty" value="date.format('yyyy-MM-dd hh:mm:ss')"/>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="deviceTypeParams"/>
+    </form>
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitDeviceTypeEditForm()">提交</a>
+    </div>
+</div>
+<script type="text/javascript">
+    function submitDeviceTypeEditForm() {
+        if (!$('#deviceTypeEditForm').form('validate')) {
+            $.messager.alert('提示', '表单还未填写完成!');
+            return;
+        }
+        $.post("/deviceType/update", $("#deviceTypeEditForm").serialize(), function (data) {
+            if (data.status == 200) {
+                $.messager.alert('提示', '修改设备种类成功!', 'info', function () {
+                    $("#deviceTypeEditWindow").window('close');
+                    $("#deviceType").datagrid("reload");
+                });
+            } else {
+                $.messager.alert('提示', data.msg);
+            }
+        });
+    }
+</script>
+</body>
+</html>

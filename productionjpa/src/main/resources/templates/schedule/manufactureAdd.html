@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+	<script type="text/javascript"
+			th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"
+			src="/js/jquery-easyui-1.7.0/jquery.min.js"></script>
+	<script type="text/javascript"
+			th:src="@{/js/jquery.easyui.min.js}"
+			src="/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript"
+			th:src="@{/js/common.js}"
+			src="/js/common.js"></script>
+	<script type="text/javascript"
+			th:src="@{/js/datagrid-filter.js}"
+			src="/js/datagrid-filter.js"></script>
+	<script type="text/javascript"
+			th:src="@{/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js}"
+			src="/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/css/easyui.css}"
+		  href="../../static/css/easyui.css"/>
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/css/icon.css}"
+		  href="../../static/css/icon.css"/>
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/css/taotao.css}"
+		  href="/css/taotao.css"/>
+
+	<link href="/js/kindeditor-4.1.10/themes/default/default.css"
+		  th:href="@{/js/kindeditor-4.1.10/themes/default/default.css}"
+		  type="text/css" rel="stylesheet">
+	<script type="text/javascript" charset="utf-8"
+			th:src="@{/js/kindeditor-4.1.10/kindeditor-all-min.js}"
+			src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+	<script type="text/javascript" charset="utf-8"
+			th:src="@{/js/kindeditor-4.1.10/lang/zh_CN.js}"
+			src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+</head>
+<body>
+<div style="padding:10px 10px 10px 10px">
+	<form id="manufactureAddForm" class="manufactureForm" method="post">
+	    <table cellpadding="5" >
+	        <tr>
+	            <td>订单编号:</td>
+	            <td>
+	            	<input class="easyui-combobox" name="vOrder"  panelHeight="auto" data-options="required:true,
+	            		valueField:'orderId',textField:'orderId',url:'/order/getData', editable:false"/>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td>工艺:</td>
+	            <td>
+	            	<input class="easyui-combobox" name="technology"  panelHeight="auto"
+						   data-options="valueField:'technologyId',textField:'technologyName',url:'/technology/getData',
+						   editable:false, required:true"/>
+    			</td>  
+	        </tr>
+	        <tr>
+	            <td>投产数量:</td>
+	            <td>
+					<input class="easyui-numberbox" type="text" name="launchQuantity"
+						   data-options="min:1,max:99999999,precision:0"/>
+				</td>
+	        </tr>
+	        <tr>
+	            <td>订购日期:</td>
+	            <td>
+					<input class="easyui-datetimebox" name="beginDate"
+        				data-options="showSeconds:true"  value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px">
+				</td>
+	        </tr>
+	        <tr>
+	            <td>要求日期:</td>
+	            <td>
+					<input class="easyui-datetimebox" name="endDate"
+        				data-options="showSeconds:true" value="date.format('yyyy-MM-dd hh:mm:ss')" style="width:150px">
+				</td>
+	        </tr>
+	    </table>
+	</form>
+	<br><br>
+	<div style="padding:5px">
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitManufactureAddForm()">提交</a>
+	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearManufactureAddForm()">重置</a>
+	</div>
+</div>
+<script type="text/javascript">
+	
+	//提交表单
+	function submitManufactureAddForm(){
+		//有效性验证
+		if(!$('#manufactureAddForm').form('validate')){
+			$.messager.alert('提示','表单还未填写完成!');
+			return ;
+		}
+		
+		//ajax的post方式提交表单
+		//$("#manufactureAddForm").serialize()将表单序列号为key-value形式的字符串
+		$.post("/manufacture/insert",$("#manufactureAddForm").serialize(), function(data){
+			if(data.status == 200){
+				$.messager.alert('提示', '新增生产计划成功!');
+				clearManufactureAddForm();
+				$("#manufactureAddWindow").window('close');
+				$("#manufactureList").datagrid("reload");
+			}else{
+				$.messager.alert('提示', data.msg);
+			}
+		});
+	}
+	
+	function clearManufactureAddForm(){
+		$('#manufactureAddForm').form('reset');
+	}
+</script>
+</body>
+</html>
