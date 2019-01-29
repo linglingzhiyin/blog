@@ -1,0 +1,50 @@
+server:
+  port: 9002
+logging:
+  config: classpath:log4j2.xml
+spring:
+  aop:
+    proxy-target-class: true
+  application:
+    name: springboot+jpa
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/20191?useUnicode=true&amp;characterEncoding=UTF-8
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: mzj123
+      initial-size: 1
+      max-active: 20
+      min-idle: 1
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 30000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+  jpa:
+    show-sql: true
+    hibernate:
+      enable_lazy_load_no_trans: true
+      ddl-auto: update
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 1
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+
+  cache:
+    type: redis

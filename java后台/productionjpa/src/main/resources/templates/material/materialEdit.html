@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"
+            src="/js/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery.easyui.min.js}"
+            src="/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/common.js}"
+            src="/js/common.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/datagrid-filter.js}"
+            src="/js/datagrid-filter.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js}"
+            src="/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/easyui.css}"
+          href="../../static/css/easyui.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/icon.css}"
+          href="../../static/css/icon.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/taotao.css}"
+          href="/css/taotao.css"/>
+
+    <link href="/js/kindeditor-4.1.10/themes/default/default.css"
+          th:href="@{/js/kindeditor-4.1.10/themes/default/default.css}"
+          type="text/css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/kindeditor-all-min.js}"
+            src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/zh_CN.js}"
+            src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+</head>
+<body>
+
+<div style="padding:10px 10px 10px 10px">
+    <form id="materialEditForm" class="materialForm" method="post">
+        <input type="hidden" name="materialId"/>
+        <table cellpadding="5">
+
+            <tr>
+                <td>物料名称:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="materialName" style="width: 160px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td>物料状态:</td>
+                <td>
+                    <select id="cc" class="easyui-combobox" name="status" panelHeight="auto" style="width:160px;"
+                            data-options="width:160, editable:false">
+                        <option value="充足">充足</option>
+                        <option value="正常">正常</option>
+                        <option value="短缺">短缺</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>剩余数量:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="remaining" style="width: 160px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>备注:</td>
+                <td>
+                    <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitMaterialEditForm()">提交</a>
+    </div>
+</div>
+<script type="text/javascript">
+    var materialEditEditor;
+    $(function () {
+        //实例化编辑器
+        materialEditEditor = TAOTAO.createEditor("#materialEditForm [name=note]");
+    });
+
+    function submitMaterialEditForm() {
+        if (!$('#materialEditForm').form('validate')) {
+            $.messager.alert('提示', '表单还未填写完成!');
+            return;
+        }
+        //同步文本框中的备注
+        materialEditEditor.sync();
+        $.post("/material/update_all", $("#materialEditForm").serialize(), function (data) {
+            if (data.status == 200) {
+                $.messager.alert('提示', '修改成功!', 'info', function () {
+                    $("#materialEditWindow").window('close');
+                    $("#materialList").datagrid("reload");
+                });
+            } else {
+                $.messager.alert('提示', data.msg);
+            }
+        });
+
+    }
+</script>
+</body>
+</html>
