@@ -1,29 +1,11 @@
 # blog
 
-## Project setup
+## 使用技术
 ```
-npm install
-```
+1、spring-boot```
+2、swagger2动态API```
+3、log4j2日志```
+4、mybatis-plus管理数据库```
+5、redis缓存````
+6、security内存实现登陆认证```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
