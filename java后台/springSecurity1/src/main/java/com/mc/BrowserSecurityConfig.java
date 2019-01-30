@@ -44,22 +44,17 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
 //                .loginPage("/example/login")
                 .loginProcessingUrl("/example/loginProcess")
-                //.successForwardUrl("/example/success")//转发
-                //.failureForwardUrl("/example/failure")//转发
-                //.defaultSuccessUrl("/example/success")//重定向
-                //.failureUrl("/example/failure")//重定向
                 .successHandler(new JsonAuthenticationSuccessHandler())
                 .failureHandler(new JsonAuthenticationFailureHandler())
                 .permitAll()
                 .and().logout()
                 .logoutUrl("/example/logoutProcess")
-                //.logoutSuccessUrl("/example/logout")//重定向
                 .logoutSuccessHandler(new JsonLogoutSuccessHandler())
                 .permitAll()
                 .and().exceptionHandling()
-                //.accessDeniedPage("/example/deny")//转发
                 .accessDeniedHandler(new JsonAccessDeniedHandler());
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.debug(true)

@@ -69,7 +69,7 @@ public class ArticleService {
     }
 
     @ApiOperation(value="展示所有articl文章", notes = "查询数据库，开始Redis缓存")
-    @GetMapping("/show")
+    //@GetMapping("/show")
 //    @Cacheable(key = "'articleList'")
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public List<Article> findArticleAll() {
