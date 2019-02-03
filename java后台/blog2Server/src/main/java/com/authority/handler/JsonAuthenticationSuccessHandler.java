@@ -14,10 +14,6 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 
-/**
- * @author lixinjie
- * @since 2018-10-18
- */
 public class JsonAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();

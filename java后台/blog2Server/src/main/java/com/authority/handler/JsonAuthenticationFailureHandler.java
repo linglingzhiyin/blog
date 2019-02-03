@@ -11,10 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
-/**
- * @author lixinjie
- * @since 2018-10-18
- */
+
 public class JsonAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
 	private boolean allowSessionCreation = true;

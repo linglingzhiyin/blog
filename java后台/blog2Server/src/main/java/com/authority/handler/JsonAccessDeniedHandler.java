@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
-/**
- * @author lixinjie
- * @since 2018-10-18
- */
+
 public class JsonAccessDeniedHandler implements AccessDeniedHandler {
 
 	@Override

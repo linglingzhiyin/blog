@@ -8,10 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
 
-/**
- * @author lixinjie
- * @since 2018-10-30
- */
 public class FakeUserDetailsService implements UserDetailsService {
 
 	@Override

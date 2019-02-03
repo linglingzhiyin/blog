@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-/**
- * @author lixinjie
- * @since 2018-10-18
- */
+
 public class JsonLogoutSuccessHandler implements LogoutSuccessHandler {
 
 	@Override

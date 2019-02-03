@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/jquery.min.js}"
+            src="/js/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery.easyui.min.js}"
+            src="/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/common.js}"
+            src="/js/common.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/datagrid-filter.js}"
+            src="/js/datagrid-filter.js"></script>
+    <script type="text/javascript"
+            th:src="@{/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js}"
+            src="/js/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/easyui.css}"
+          href="../../static/css/easyui.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/icon.css}"
+          href="../../static/css/icon.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/taotao.css}"
+          href="/css/taotao.css"/>
+
+    <link href="/js/kindeditor-4.1.10/themes/default/default.css"
+          th:href="@{/js/kindeditor-4.1.10/themes/default/default.css}"
+          type="text/css" rel="stylesheet">
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/kindeditor-all-min.js}"
+            src="/js/kindeditor-4.1.10/kindeditor-all-min.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            th:src="@{/js/kindeditor-4.1.10/lang/zh_CN.js}"
+            src="/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+    <link th:href="@{/css/uploadfile.css}"
+          href="/css/uploadfile.css" rel="stylesheet">
+    <script th:src="@{/js/jquery.uploadfile.js}"
+            src="/js/jquery.uploadfile.js"></script>
+    <script th:src="@{/js/malsup.github.iojquery.form.js}"
+            src="/js/malsup.github.iojquery.form.js"></script>
+
+</head>
+<body>
+
+<div style="padding:10px 10px 10px 10px">
+    <form id="userAddForm" class="userForm" method="post">
+        <table cellpadding="5">
+            <tr>
+                <td>登陆名:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="userName"
+                           data-options="required:true"/>
+                </td>
+            </tr>
+            <tr>
+                <td>密码:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="password"
+                           data-options="required:true"/>
+                </td>
+            </tr>
+            <tr>
+                <td>用户名:</td>
+                <td>
+                    <input class="easyui-textbox" type="text" name="name"
+                           data-options="required:true"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div style="padding:5px">
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           onclick="submitUserAddForm()">提交</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           onclick="clearUserAddForm()">重置</a>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function submitUserAddForm() {
+        if (!$('#userAddForm').form('validate')) {
+            $.messager.alert('提示', '表单还未填写完成!');
+            return;
+        }
+
+        $.post("/user", $("#userAddForm").serialize(), function (data) {
+            if (data.status == 200) {
+                $.messager.alert('提示', '新增权限成功!');
+                clearUserAddForm();
+                $("#userAddWindow").window('close');
+                $("#userList").datagrid("reload");
+            } else {
+                $.messager.alert('提示', data.msg);
+            }
+        });
+    }
+
+    function clearUserAddForm() {
+        $('#userAddForm').form('reset');
+
+    }
+</script>
+</body>
+</html>
